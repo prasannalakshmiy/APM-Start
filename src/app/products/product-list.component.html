@@ -39,7 +39,8 @@
                     <td>{{product.productCode | lowercase | convertToSpaces:'-'}}</td>
                     <td>{{product.releaseDate}}</td>
                     <td>{{product.price | currency:'USD':true:'1.2-2'}}</td>
-                    <td><pm-star [rating]='product.starRating'></pm-star></td>  <!-- to nested component, from main component @Input() -->
+                    <td><pm-star [rating]='product.starRating' (ratingClicked) = 'onRatingClicked($event)'></pm-star></td>  <!-- data to nested component(child), from main component(parent) @Input() -->
+                    <!-- ratingClicked will listen for the event to be fired by its child and after the event is fired it searches for onRatingClicked in its controller (parent) -->
                 </tr>
             </tbody>   
         </table>

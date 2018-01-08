@@ -37,6 +37,20 @@ export class ProductListComponent implements OnInit{
       return this.products.filter((product:IProduct) => product.productName.toLocaleLowerCase().indexOf(filterBy)!= -1);
          // Array filter 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter' 
     }
+
+    onRatingClicked (message : string): void {
+this.pageTitle = 'Product List '+ message;
+        
+    }
+
+
+    toggleImage (): void{
+this.showImage = !this.showImage;
+}
+ngOnInit() : void{
+    console.log('in ngOnInit');
+}
+
     products: IProduct[] = [
     {
         "productId": 1,
@@ -90,10 +104,5 @@ export class ProductListComponent implements OnInit{
     }
 ];
 
-toggleImage (): void{
-this.showImage = !this.showImage;
-}
-ngOnInit() : void{
-    console.log('in ngOnInit');
-}
+
 }
