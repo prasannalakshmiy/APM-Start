@@ -1,63 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {IProduct} from './product';
-import {ProductService} from './product.service';
+
+@Injectable()
+export class ProductService{
 
 
-@Component({
-    selector:'pm-products',
-    templateUrl:'./product-list.component.html',
-    styleUrls:['./Product-list.component.css']
-})
-
-export class ProductListComponent implements OnInit{
-    pageTitle: string ='Product List!';
-    imageWidth : number = 30;
-    imageMargin : number = 2;
-    showImage : boolean = false;
-    _listFilter : string ;
-    products: IProduct[] ;
-
-    filteredProducts :IProduct[];
-    
-     get listFilter() : string {
-         return this._listFilter;
-     }
-    
-    set listFilter(value:string) {
-       this._listFilter = value;
-       this.filteredProducts = this.listFilter?(this.performFilter(this.listFilter)):(this.products);
-       
-
-    }
-    constructor(private _productService : ProductService){
-        // Constructor is executed first when the component is loaded
-      //  this.products = _productService.getProducts();
-        
-       // this.listFilter = 'cart';
-    }
-    performFilter(filterBy: string) : IProduct[] {
-        filterBy = filterBy.toLocaleLowerCase();
-      return this.products.filter((product:IProduct) => product.productName.toLocaleLowerCase().indexOf(filterBy)!= -1);
-         // Array filter 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter' 
-    }
-
-    onRatingClicked (message : string): void {
-this.pageTitle = 'Product List '+ message;
-        
-    }
-
-
-    toggleImage (): void{
-this.showImage = !this.showImage;
-}
-//ngOnInit is executed AFTER the Constructor is executed
-ngOnInit() : void{
-    console.log('in ngOnInit');
-   this.products = this._productService.getProducts();
-   this.filteredProducts = this.products;
-}
-
- /*   products: IProduct[] = [
+getProducts():IProduct[] {
+  return  [
     {
         "productId": 1,
         "productName": "Leaf Rake",
@@ -108,7 +57,6 @@ ngOnInit() : void{
         "starRating": 4.6,
         "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
     }
-];  */
-
-
+];
+}
 }
