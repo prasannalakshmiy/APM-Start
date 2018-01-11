@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit{
     showImage : boolean = false;
     _listFilter : string ;
     products: IProduct[] ;
+    errorMessage : string;
 
     filteredProducts :IProduct[];
     
@@ -53,8 +54,14 @@ this.showImage = !this.showImage;
 //ngOnInit is executed AFTER the Constructor is executed
 ngOnInit() : void{
     console.log('in ngOnInit');
-   this.products = this._productService.getProducts();
-   this.filteredProducts = this.products;
+
+//    this.products = this._productService.getProducts();
+   this._productService.getProducts()
+   .subscribe(products => {
+       this.products = products;
+       this.filteredProducts = this.products;
+   }, error => this.errorMessage = <any>error);
+   
 }
 
  /*   products: IProduct[] = [
